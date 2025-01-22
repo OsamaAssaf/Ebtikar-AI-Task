@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: languageController.getLocale(),
       theme: ThemeManager.getLightTheme(),
-      // darkTheme: ThemeManager.getDarkTheme(),
       themeMode: SharedPrefsService().getThemeMode(),
       navigatorKey: navigatorKey,
       scaffoldMessengerKey: scaffoldMessengerKey,

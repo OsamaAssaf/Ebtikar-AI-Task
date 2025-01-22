@@ -38,18 +38,6 @@ class SizeManager {
   static const double regularIcon = 18.0;
   static const double mediumIcon = 20.0;
   static const double largeIcon = 24.0;
-  static const double hugeIcon = 70.0;
+  static const double hugeIcon = 64.0;
   static const double largeHugeIcon = 200.0;
-
-  // Container height
-  static const double customContainerHeight = 48.0;
-
-  // Image
-  static const double hugeImage = 110.0;
-  static const double smallImage = 110.0;
-
-  //angle
-  static const double angel12 = -12.73 * 3.14159 / 180;
-  static const double angel18 = -18.25 * 3.14159 / 180;
-  static const double angel19 = -19.25 * 3.14159 / 180;
 }

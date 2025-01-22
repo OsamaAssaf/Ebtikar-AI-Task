@@ -30,6 +30,7 @@ class LanguageController extends GetxController {
     selectedLanguageCode = code;
     update();
     _setLanguage(selectedLanguageCode);
+    Get.offAllNamed(Routes.splashRoute);
   }
 
   static Future<void> _setLanguage(String value) async {
@@ -37,7 +38,7 @@ class LanguageController extends GetxController {
   }
 
   Locale getLocale() {
-    selectedLanguageCode = SharedPrefsService().getLanguage() ?? _arabicLangValue;
+    selectedLanguageCode = SharedPrefsService().getLanguage() ?? _englishLangValue;
     return Locale(selectedLanguageCode);
   }
 }

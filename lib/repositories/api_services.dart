@@ -13,7 +13,7 @@ class ApiServices {
     required String endpoint,
     bool shouldCheck = true,
   }) async {
-    final String url = '${DotenvManager.apiPath}/$endpoint';
+    final String url = '${DotenvManager.baseUrl}/$endpoint';
     final http.Response response = await http
         .get(
       Uri.parse(url),
@@ -25,6 +25,7 @@ class ApiServices {
         return http.Response(ExceptionManager.timedOutException, 408);
       },
     );
+
     final int statusCode = response.statusCode;
     final dynamic decodedBody = jsonDecode(response.body);
     if (shouldCheck) {
@@ -38,7 +39,7 @@ class ApiServices {
     required String body,
     bool shouldCheck = true,
   }) async {
-    final String url = '${DotenvManager.apiPath}/$endpoint';
+    final String url = '${DotenvManager.baseUrl}/$endpoint';
     final http.Response response = await http
         .post(
       Uri.parse(url),
@@ -64,7 +65,7 @@ class ApiServices {
     required String body,
     bool shouldCheck = true,
   }) async {
-    final String url = '${DotenvManager.apiPath}/$endpoint';
+    final String url = '${DotenvManager.baseUrl}/$endpoint';
     final http.Response response = await http
         .put(
       Uri.parse(url),
@@ -89,7 +90,7 @@ class ApiServices {
     required String endpoint,
     bool shouldCheck = true,
   }) async {
-    final String url = '${DotenvManager.apiPath}/$endpoint';
+    final String url = '${DotenvManager.baseUrl}/$endpoint';
     final http.Response response = await http
         .delete(
       Uri.parse(url),

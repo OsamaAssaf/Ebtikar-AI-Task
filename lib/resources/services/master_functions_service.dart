@@ -34,8 +34,6 @@ class MasterFunctionsService {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: ColorsManager.background,
-          // statusBarBrightness: Brightness.light,
-          // statusBarIconBrightness: Brightness.light,
         ),
       );
     } else {

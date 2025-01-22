@@ -10,6 +10,10 @@ class NavigationView extends StatelessWidget {
         return Scaffold(
           body: controller.getPage(),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: customTheme.secondaryBackground,
+            selectedItemColor: theme.colorScheme.primary,
+            unselectedItemColor: theme.colorScheme.surface,
+            type: BottomNavigationBarType.fixed,
             onTap: (int index) {
               controller.changeIndex(index);
             },

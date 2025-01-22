@@ -3,12 +3,12 @@ import 'package:ebtikar_ai_task/resources/helpers/all_imports.dart';
 class Routes {
   static const String unDefinedRoute = '/NotFoundView';
   static const String splashRoute = '/SplashView';
-  static const String authRoute = '/AuthView';
   static const String navigationRoute = '/NavigationView';
   static const String homeRoute = '/HomeView';
   static const String connectionErrorRoute = '/ConnectionErrorView';
   static const String settingsRoute = '/SettingView';
   static const String profileRoute = '/ProfileView';
+  static const String viewSingleVideoRoute = '/ViewSingleVideoView';
 }
 
 mixin RouteGenerator {
@@ -18,11 +18,6 @@ mixin RouteGenerator {
         name: Routes.splashRoute,
         page: () => SplashView(),
         binding: SplashBinding(),
-      ),
-      GetPage(
-        name: Routes.authRoute,
-        page: () => AuthView(),
-        binding: AuthBinding(),
       ),
       GetPage(
         name: Routes.navigationRoute,
@@ -47,6 +42,11 @@ mixin RouteGenerator {
         name: Routes.profileRoute,
         page: () => ProfileView(),
         binding: ProfileBinding(),
+      ),
+      GetPage(
+        name: Routes.viewSingleVideoRoute,
+        page: () => ViewSingleVideoView(),
+        binding: ViewSingleVideoBinding(),
       ),
     ];
   }

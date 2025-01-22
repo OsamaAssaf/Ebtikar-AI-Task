@@ -28,7 +28,7 @@ class CustomBottomSheetButton extends StatelessWidget {
           child: Center(
             child: ScaleText(
               title,
-              style: theme.textTheme.titleMedium!.copyWith(
+              style: theme.textTheme.bodyMedium!.copyWith(
                 color: titleColor,
               ),
             ),

@@ -19,144 +19,110 @@ class SettingsView extends StatelessWidget {
             child: ListView(
               physics: const ClampingScrollPhysics(),
               children: [
-                SettingItem(
-                  title: localizations.changeLanguage,
-                  leading: Icon(
-                    Icons.language_rounded,
-                    color: customTheme.blackText,
-                    size: ConstantsManager.iconSize,
-                  ),
-                  onTap: () {
-                    Components().bottomSheet(
-                      context: context,
-                      child: Column(
-                        children: [
-                          RadioListTile.adaptive(
-                            value: ConstantsManager.arabicLangValue,
-                            groupValue: controller.currentLanguage,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            secondary: SvgPicture.asset(
-                              IconsManager.arabicLanguageSvg,
-                              width: 24.0,
-                              height: 24.0,
-                              colorFilter: ColorFilter.mode(
-                                theme.colorScheme.primary,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            title: ScaleText(
-                              localizations.arabic,
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            onChanged: (String? value) {
-                              controller.changeLanguage(value!);
+                GetBuilder<LanguageController>(
+                  builder: (languageController) {
+                    return SettingsDrawerItem(
+                      title: localizations.language,
+                      subtitle: languageController.selectedLanguageLabel,
+                      icon: FontAwesomeIcons.language,
+                      onTap: () {
+                        Components().bottomSheet(
+                          context: context,
+                          child: GetBuilder<LanguageController>(
+                            builder: (languageController) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: languageController.languageList.map(
+                                  (e) {
+                                    return RadioListTile.adaptive(
+                                      value: e.code,
+                                      title: ScaleText(
+                                        e.name,
+                                        style: theme.textTheme.bodyLarge,
+                                      ),
+                                      groupValue: languageController.selectedLanguageCode,
+                                      onChanged: (String? value) {
+                                        languageController.changeLanguage(value!);
+                                        Get.back();
+                                      },
+                                    );
+                                  },
+                                ).toList(),
+                              );
                             },
                           ),
-                          RadioListTile.adaptive(
-                            value: ConstantsManager.englishLangValue,
-                            groupValue: controller.currentLanguage,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            secondary: SvgPicture.asset(
-                              IconsManager.englishLanguageSvg,
-                              width: 24.0,
-                              height: 24.0,
-                              colorFilter: ColorFilter.mode(
-                                theme.colorScheme.primary,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            title: ScaleText(
-                              localizations.english,
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            onChanged: (String? value) {
-                              controller.changeLanguage(value!);
-                            },
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     );
                   },
                 ),
-                const SettingDivider(),
-                SettingItem(
-                  title: localizations.changeTheme,
-                  leading: Icon(
-                    Icons.color_lens_outlined,
-                    color: customTheme.blackText,
-                    size: ConstantsManager.iconSize,
-                  ),
-                  onTap: () {
-                    Components().bottomSheet(
-                      context: context,
-                      child: Column(
-                        children: [
-                          RadioListTile.adaptive(
-                            value: ThemeMode.system,
-                            groupValue: controller.currentTheme,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            secondary: Icon(
-                              Icons.auto_mode_outlined,
-                              color: theme.colorScheme.primary,
-                              size: ConstantsManager.iconSize,
-                            ),
-                            title: ScaleText(
-                              localizations.auto,
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            onChanged: (ThemeMode? value) {
-                              controller.changeTheme(value!, context);
-                            },
-                          ),
-                          RadioListTile.adaptive(
-                            value: ThemeMode.light,
-                            groupValue: controller.currentTheme,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            secondary: Icon(
-                              Icons.light_mode_outlined,
-                              color: theme.colorScheme.primary,
-                              size: ConstantsManager.iconSize,
-                            ),
-                            title: ScaleText(
-                              localizations.light,
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            onChanged: (ThemeMode? value) {
-                              controller.changeTheme(value!, context);
-                            },
-                          ),
-                          RadioListTile.adaptive(
-                            value: ThemeMode.dark,
-                            groupValue: controller.currentTheme,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            secondary: Icon(
-                              Icons.dark_mode_outlined,
-                              color: theme.colorScheme.primary,
-                              size: ConstantsManager.iconSize,
-                            ),
-                            title: ScaleText(
-                              localizations.dark,
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            onChanged: (ThemeMode? value) {
-                              controller.changeTheme(value!, context);
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                const SettingDivider(),
-                // SwitchItem(
-                //   value: settingController.isNotificationsOn,
-                //   title: localizations.notifications,
+                // const SettingDivider(),
+                // SettingItem(
+                //   title: localizations.changeTheme,
                 //   leading: Icon(
-                //     Icons.notifications_none_rounded,
+                //     Icons.color_lens_outlined,
                 //     color: customTheme.blackText,
+                //     size: ConstantsManager.iconSize,
                 //   ),
-                //   onChanged: (bool? value) {
-                //     settingController.changeIsNotificationsOn(value!);
+                //   onTap: () {
+                //     Components().bottomSheet(
+                //       context: context,
+                //       child: Column(
+                //         children: [
+                //           RadioListTile.adaptive(
+                //             value: ThemeMode.system,
+                //             groupValue: controller.currentTheme,
+                //             controlAffinity: ListTileControlAffinity.trailing,
+                //             secondary: Icon(
+                //               Icons.auto_mode_outlined,
+                //               color: theme.colorScheme.primary,
+                //               size: ConstantsManager.iconSize,
+                //             ),
+                //             title: ScaleText(
+                //               localizations.auto,
+                //               style: theme.textTheme.bodyLarge,
+                //             ),
+                //             onChanged: (ThemeMode? value) {
+                //               controller.changeTheme(value!, context);
+                //             },
+                //           ),
+                //           RadioListTile.adaptive(
+                //             value: ThemeMode.light,
+                //             groupValue: controller.currentTheme,
+                //             controlAffinity: ListTileControlAffinity.trailing,
+                //             secondary: Icon(
+                //               Icons.light_mode_outlined,
+                //               color: theme.colorScheme.primary,
+                //               size: ConstantsManager.iconSize,
+                //             ),
+                //             title: ScaleText(
+                //               localizations.light,
+                //               style: theme.textTheme.bodyLarge,
+                //             ),
+                //             onChanged: (ThemeMode? value) {
+                //               controller.changeTheme(value!, context);
+                //             },
+                //           ),
+                //           RadioListTile.adaptive(
+                //             value: ThemeMode.dark,
+                //             groupValue: controller.currentTheme,
+                //             controlAffinity: ListTileControlAffinity.trailing,
+                //             secondary: Icon(
+                //               Icons.dark_mode_outlined,
+                //               color: theme.colorScheme.primary,
+                //               size: ConstantsManager.iconSize,
+                //             ),
+                //             title: ScaleText(
+                //               localizations.dark,
+                //               style: theme.textTheme.bodyLarge,
+                //             ),
+                //             onChanged: (ThemeMode? value) {
+                //               controller.changeTheme(value!, context);
+                //             },
+                //           ),
+                //         ],
+                //       ),
+                //     );
                 //   },
                 // ),
               ],

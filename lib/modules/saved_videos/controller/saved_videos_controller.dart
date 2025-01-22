@@ -1,14 +1,10 @@
 import 'package:ebtikar_ai_task/resources/helpers/all_imports.dart';
 
-class HomeController extends GetxController {
-  final VideoRepository videoRepository;
-
-  HomeController({required this.videoRepository});
-
+class SavedVideosController extends GetxController {
   @override
   void onInit() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getVideos();
+      getSavedVideos();
     });
 
     super.onInit();
@@ -17,17 +13,11 @@ class HomeController extends GetxController {
   bool isLoading = true;
   List<VideoModel> videoList = [];
 
-  Future<void> getVideos() async {
+  Future<void> getSavedVideos() async {
     try {
       isLoading = true;
       update();
-      videoList = await videoRepository.getVideos();
-      if (videoList.isNotEmpty) {
-        await initVideoController(0);
-        if (videoList.length > 1) {
-          await initVideoController(1);
-        }
-      }
+      videoList = SharedPrefsService().getSavedVideos();
     } catch (_) {
       ExceptionManager().showException();
     } finally {

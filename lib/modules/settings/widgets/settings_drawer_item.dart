@@ -27,12 +27,12 @@ class SettingsDrawerItem extends StatelessWidget {
     return ListTile(
       title: ScaleText(
         title,
-        style: theme.textTheme.titleLarge,
+        style: theme.textTheme.bodyLarge,
       ),
       subtitle: subtitle != null
           ? ScaleText(
               subtitle!,
-              style: theme.textTheme.titleMedium,
+              style: theme.textTheme.bodyMedium,
             )
           : null,
       leading: leading ??
@@ -44,13 +44,13 @@ class SettingsDrawerItem extends StatelessWidget {
                 )
               : Icon(
                   icon,
-                  size: ConstantsManager.iconSize,
+                  size: 24.0,
                   color: theme.colorScheme.primary,
                 )),
       trailing: onTap != null
           ? Icon(
               Icons.arrow_forward_ios_rounded,
-              size: ConstantsManager.iconSize,
+              size: 20.0,
               color: theme.colorScheme.primary,
             )
           : switchValue != null

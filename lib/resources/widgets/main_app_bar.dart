@@ -56,7 +56,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Icon(
                   Icons.arrow_back_ios_rounded,
                   color: iconColor ?? customTheme.blackText,
-                  size: ConstantsManager.iconSize,
+                  size: SizeManager.regularIcon,
                 ),
               ),
             )
@@ -65,7 +65,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? PreferredSize(
               preferredSize: const Size.fromHeight(1.0),
               child: Container(
-                color: theme.colorScheme.primary,
+                color: customTheme.secondaryBackground,
                 height: 0.5,
               ),
             )

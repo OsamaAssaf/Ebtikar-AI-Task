@@ -11,24 +11,6 @@ class SharedPrefsService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> saveUserModel(UserModel value) async {
-    final String userData = jsonEncode(value.toJson());
-    final String encryptedUserData = await EncryptionService().encrypt(userData);
-    await sharedPreferences.setString(
-      DotenvManager.userModelPrefsKey,
-      encryptedUserData,
-    );
-  }
-
-  Future<UserModel?> getUserModel() async {
-    final String? encryptedUserData = sharedPreferences.getString(DotenvManager.userModelPrefsKey);
-    if (encryptedUserData == null) return null;
-    final String userData = await EncryptionService().decrypt(encryptedUserData);
-    return UserModel.fromJson(
-      jsonDecode(userData),
-    );
-  }
-
   Future<void> setLanguage(String value) async {
     await sharedPreferences.setString(DotenvManager.languagePrefsKey, value);
   }
@@ -56,12 +38,31 @@ class SharedPrefsService {
             ? ThemeMode.light
             : ThemeMode.system;
   }
-  //
-  // Future<void> saveIsFirstTime(bool value) async {
-  //   await sharedPreferences.setBool(DotenvManager.isFirstTimePrefsKey, value);
-  // }
-  //
-  // bool getIsFirstTime() {
-  //   return sharedPreferences.getBool(DotenvManager.isFirstTimePrefsKey) ?? true;
-  // }
+
+  Future<void> saveSavedVideos(VideoModel videoModel) async {
+    final List<VideoModel> result = getSavedVideos();
+    if (result.contains(videoModel)) return;
+    result.add(videoModel);
+    final List<String> list = [];
+    for (final VideoModel video in result) {
+      list.add(jsonEncode(video.toJson()));
+    }
+    if (list.isNotEmpty) {
+      await sharedPreferences.setStringList(DotenvManager.savedVideosPrefsKey, list);
+    }
+  }
+
+  List<VideoModel> getSavedVideos() {
+    final List<String>? list = sharedPreferences.getStringList(DotenvManager.savedVideosPrefsKey);
+    if (list == null) return [];
+    final List<VideoModel> result = [];
+    for (final String item in list) {
+      result.add(VideoModel.fromJson(jsonDecode(item)));
+    }
+    return result;
+  }
+
+  Future<void> clearSavedVideos() async {
+    await sharedPreferences.remove(DotenvManager.savedVideosPrefsKey);
+  }
 }

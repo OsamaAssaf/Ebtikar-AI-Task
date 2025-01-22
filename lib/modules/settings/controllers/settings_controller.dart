@@ -66,7 +66,7 @@ class SettingsController extends GetxController {
       context: context,
       title: ScaleText(
         localizations.applicationWillRestart,
-        style: theme.textTheme.titleLarge,
+        style: theme.textTheme.bodyLarge,
         isFromDialog: true,
       ),
       actions: [

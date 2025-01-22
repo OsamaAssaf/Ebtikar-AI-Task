@@ -12,11 +12,11 @@ class SplashView extends StatelessWidget {
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxWidth: width * 0.25,
-            maxHeight: width * 0.25,
+            maxWidth: width * 0.50,
+            maxHeight: width * 0.50,
           ),
           child: Image.asset(
-            IconsManager.appIcon,
+            IconsManager.appLogo,
           ),
         ),
       ),
