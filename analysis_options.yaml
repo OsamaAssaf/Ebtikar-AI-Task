@@ -1,0 +1,15 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    always_specify_types: false
+    avoid_classes_with_only_static_members: true
+    avoid_empty_else: true
+    prefer_mixin: true
+    use_rethrow_when_possible: true
+    prefer_final_locals: true
+    prefer_final_in_for_each: true
+    always_use_package_imports: true
+    cancel_subscriptions: true
+    use_enums: true
